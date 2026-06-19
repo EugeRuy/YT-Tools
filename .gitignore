@@ -1,0 +1,12 @@
+node_modules/
+dist/
+release/
+logs/
+*.log
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+Thumbs.db
+resources/
+rec.txt

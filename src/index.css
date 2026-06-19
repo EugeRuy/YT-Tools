@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface text-gray-100 font-sans antialiased;
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(220, 38, 38, 0.03) 0%, transparent 60%);
+    background-attachment: fixed;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-light;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-lighter rounded-full hover:bg-gray-600 transition-colors;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-surface-card rounded-2xl border border-surface-border/60 p-6
+           transition-all duration-300;
+  }
+
+  .card:hover {
+    @apply border-red-metallic-glow/30;
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.05);
+  }
+
+  .card-static {
+    @apply bg-surface-card rounded-2xl border border-surface-border/60 p-6;
+  }
+
+  .btn-primary {
+    @apply relative overflow-hidden px-6 py-3 bg-gradient-to-br from-red-600 to-red-700
+           text-white font-semibold rounded-xl
+           hover:from-red-500 hover:to-red-600
+           active:scale-[0.98] transition-all duration-200
+           disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100
+           shadow-lg shadow-red-900/30 hover:shadow-red-900/50;
+  }
+
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-200;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+  }
+
+  .btn-primary:hover::before {
+    @apply opacity-100;
+  }
+
+  .btn-danger {
+    @apply px-6 py-3 bg-gradient-to-br from-gray-700 to-gray-800
+           text-gray-200 font-semibold rounded-xl border border-gray-600/50
+           hover:from-red-700 hover:to-red-800 hover:border-red-600/50
+           active:scale-[0.98] transition-all duration-200
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-gray-500 font-medium rounded-xl
+           hover:text-gray-200 hover:bg-white/5 transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-surface border border-surface-border rounded-xl
+           text-gray-100 placeholder-gray-600
+           focus:outline-none focus:ring-2 focus:ring-red-600/40 focus:border-red-600/50
+           transition-all duration-200;
+  }
+
+  .glass {
+    @apply bg-surface-light/60 backdrop-blur-xl border-b border-surface-border/50;
+  }
+
+  .shimmer-bg {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(220, 38, 38, 0.05) 25%,
+      rgba(220, 38, 38, 0.1) 50%,
+      rgba(220, 38, 38, 0.05) 75%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  .progress-bar {
+    @apply h-2 bg-surface rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full rounded-full transition-all duration-500 ease-out;
+    background: linear-gradient(90deg, #059669, #10b981);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+  }
+
+  .progress-bar-fill.error {
+    background: linear-gradient(90deg, #dc2626, #ef4444);
+    box-shadow: 0 0 12px rgba(220, 38, 38, 0.4);
+  }
+
+  .nav-glow {
+    box-shadow: 0 1px 0 rgba(220, 38, 38, 0.3);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-600;
+  }
+
+  .text-gradient-white {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-shimmer {
+    will-change: background-position;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-scale-in,
+  .animate-glow-pulse,
+  .animate-shimmer,
+  .animate-pulse {
+    animation: none !important;
+  }
+
+  .card:hover {
+    transition: none !important;
+  }
+
+  .btn-primary,
+  .btn-danger,
+  .btn-ghost {
+    transition: none !important;
+  }
+}
