@@ -1,13 +1,13 @@
-# YT-Tools v1.0
+# YT-Tools v2.0
 
-A modern desktop application for extracting YouTube audio and generating transcriptions. Built with React + Electron + Python.
+A modern desktop application for downloading videos and extracting audio/transcriptions from any platform. Built with React + Electron + Python.
 
 ![Tech Stack](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)
 ![Tech Stack](https://img.shields.io/badge/Electron-47848F?logo=electron&logoColor=white)
 ![Tech Stack](https://img.shields.io/badge/TailwindCSS-06B6D4?logo=tailwindcss&logoColor=white)
 ![Tech Stack](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 ![Tech Stack](https://img.shields.io/badge/Zustand-000000?logo=react&logoColor=white)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-2.0.0-blue)
 
 ![Screenshot](images/screenshot.png)
 
@@ -23,6 +23,8 @@ A modern desktop application for extracting YouTube audio and generating transcr
 - ✓ **Markdown export** — every `.txt` transcript comes with an identical `.md` sibling
 - ✓ **Batch processing** — process multiple videos from a channel or URL list in one go
 - ✓ **Real-time progress** — live logs and progress bars for every task
+- ✓ **Multi-platform video download** — YouTube, Instagram, Twitter, Vimeo, Twitch, and 1000+ more sites via yt-dlp
+- ✓ **1080p quality** — automatic ffmpeg detection for high-quality video downloads
 - ✓ **Electron desktop app** — native Windows experience with drag-and-drop, file pickers, persistent settings
 
 ---
@@ -87,12 +89,13 @@ yt-tools/
 │   │   ├── FolderPicker.tsx     # Folder selection button
 │   │   └── ErrorBoundary.tsx    # Error boundary wrapper
 │   ├── pages/                   # Route pages
-│   │   ├── HomePage.tsx         # Dashboard with 4 feature cards
+│   │   ├── HomePage.tsx         # Dashboard with 5 feature cards
 │   │   ├── ExtractLinksPage.tsx  # Feature 1
 │   │   ├── ExtractTextPage.tsx   # Feature 2
 │   │   ├── ExtractMp3Page.tsx    # Feature 3
 │   │   ├── ExtractMp3AndTextPage.tsx  # Feature 4
-│   │   └── SettingsPage.tsx     # Whisper + general settings
+│   │   ├── ExtractVideoPage.tsx  # Feature 5
+│   │   └── SettingsPage.tsx     # Whisper + video quality + general settings
 │   ├── hooks/
 │   │   └── useTaskForm.ts       # Shared form state hook
 │   ├── stores/
@@ -107,6 +110,7 @@ yt-tools/
 │   ├── extract_links.py         # Wrapper for get_links_youtube.py
 │   ├── extract_text.py          # Wrapper for multy_transcriber_1Folder.py
 │   ├── download_mp3.py          # Wrapper for simple_multi_download.py
+│   ├── download_video.py        # Wrapper for multi-platform video download
 │   ├── transcribe_mp3_text.py   # Wrapper for simple_multi_transcriber_Faster_Whispe.py
 │   └── requirements.txt         # Python dependencies
 ├── get_links_youtube.py         # Original scripts (kept as-is)
@@ -147,7 +151,7 @@ Starts Vite dev server + loads Electron window automatically.
 
 ## Download
 
-[Download latest portable exe](https://github.com/EugeRuy/yt-tools/releases/latest/download/YT-Tools-1.0.0-portable.exe)
+[Download latest portable exe (v2.0)](https://github.com/EugeRuy/yt-tools/releases/latest/download/YT-Tools-2.0.0-portable.exe)
 
 No installation required — just download and run. Requires Python 3.8+ with:
 ```bash
@@ -177,6 +181,8 @@ Creates `release/YT-Tools-*-portable.exe`.
 | Beam Size | `5` | Beam search size for transcription |
 | Max Parallel Jobs | `1` | Reserved for future parallel processing |
 
+> **Video Quality**: If [ffmpeg](https://ffmpeg.org/download.html) is installed on your system, video downloads automatically use 1080p. Otherwise 720p is used. Check status in Settings → Video Quality.
+
 ---
 
 ## Output Naming Convention
@@ -201,6 +207,7 @@ shared.py (ALL reusable logic)
 ├── build_filename()
 ├── get_video_metadata(url) → (channel, title)
 ├── download_audio(url, output_dir)
+├── download_video(url, output_dir, channel?, title?)
 ├── find_audio_file(directory)
 ├── write_text_and_markdown(content, base_path)
 ├── load_whisper_model()
@@ -213,6 +220,7 @@ Wrappers (~40-60 lines each):
 ├── extract_links.py
 ├── extract_text.py
 ├── download_mp3.py
+├── download_video.py
 └── transcribe_mp3_text.py
 
 Original scripts (untouched):
@@ -236,6 +244,7 @@ Original scripts (untouched):
 | `dialog:openFolder` | — | Open native folder picker |
 | `settings:get` | — | Retrieve all settings |
 | `settings:set` | `{key: value}` | Update settings |
+| `ffmpeg:check` | — | Check if ffmpeg is installed on the system |
 
 ### Messages: Main → Renderer
 
