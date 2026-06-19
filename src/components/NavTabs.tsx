@@ -7,6 +7,7 @@ const tabs = [
   { to: '/extract-text', label: 'Extract Text', icon: '⊡' },
   { to: '/extract-mp3', label: 'Extract MP3', icon: '♪' },
   { to: '/extract-mp3-text', label: 'Extract MP3 + Text', icon: '♫' },
+  { to: '/extract-video', label: 'Extract Video', icon: '▶' },
 ]
 
 const NavTabs = memo(function NavTabs() {

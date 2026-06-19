@@ -9,7 +9,7 @@ export function useTaskForm(taskType: TaskType) {
   const [outputDir, setOutputDir] = useState(settings.defaultOutputFolder)
 
   const handleStart = async () => {
-    const needsFile = taskType !== 'extract_links'
+    const needsFile = taskType !== 'extract_links' && taskType !== 'download_video'
     if (needsFile && !inputFile) return
     if (!needsFile && !url.trim()) return
     if (!outputDir) return
@@ -24,7 +24,7 @@ export function useTaskForm(taskType: TaskType) {
   }
 
   const canStart = outputDir && !isRunning && (
-    taskType === 'extract_links' ? url.trim() : inputFile
+    taskType === 'extract_links' || taskType === 'download_video' ? url.trim() : inputFile
   )
 
   return {

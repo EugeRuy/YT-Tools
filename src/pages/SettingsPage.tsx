@@ -1,4 +1,5 @@
 import { useStore } from '../stores/useStore'
+import { useEffect, useState } from 'react'
 import type { AppSettings } from '../types'
 
 const WHISPER_MODELS = ['tiny', 'base', 'small', 'medium', 'large-v3'] as const
@@ -7,6 +8,11 @@ const COMPUTE_TYPES = ['int8', 'float16', 'int8_float16'] as const
 
 export default function SettingsPage() {
   const { settings, updateSettings, setSettings } = useStore()
+  const [ffmpegInstalled, setFfmpegInstalled] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    window.electronAPI.checkFfmpeg().then((r) => setFfmpegInstalled(r.installed))
+  }, [])
 
   const handleSave = async () => {
     try {
@@ -155,6 +161,35 @@ export default function SettingsPage() {
                 }
                 className="input-field"
               />
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-surface-border/60 pt-6">
+          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+            Video Quality
+          </h3>
+          <div className={`flex items-center gap-3 p-4 rounded-xl border ${ffmpegInstalled ? 'bg-success/5 border-success/20' : 'bg-surface border-surface-border'}`}>
+            <div className={`w-2.5 h-2.5 rounded-full shrink-0 ${ffmpegInstalled === null ? 'bg-gray-600 animate-pulse' : ffmpegInstalled ? 'bg-success' : 'bg-warning'}`} />
+            <div className="text-sm">
+              {ffmpegInstalled === null ? (
+                <span className="text-gray-500">Checking...</span>
+              ) : ffmpegInstalled ? (
+                <>
+                  <span className="text-success font-medium">ffmpeg detected</span>
+                  <span className="text-gray-400 ml-1">— videos download at up to 1080p</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-warning font-medium">ffmpeg not found</span>
+                  <span className="text-gray-400 ml-1">— videos download at 720p max</span>
+                  <p className="text-gray-600 mt-1">
+                    Install ffmpeg for 1080p downloads:{' '}
+                    <a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">ffmpeg.org/download.html</a>
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -33,6 +33,14 @@ const features = [
     path: '/extract-mp3-text',
     gradient: 'from-red-600/20 to-red-800/10',
   },
+  {
+    title: 'Extract Video',
+    description:
+      'Download videos from any platform: YouTube, Vimeo, Twitter, Twitch, and more.',
+    icon: '▶',
+    path: '/extract-video',
+    gradient: 'from-red-600/20 to-red-800/10',
+  },
 ]
 
 export default function HomePage() {

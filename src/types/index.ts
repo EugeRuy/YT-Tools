@@ -26,7 +26,7 @@ export interface PythonMessage {
   params?: Record<string, string>
 }
 
-export type TaskType = 'extract_links' | 'extract_text' | 'download_mp3' | 'transcribe_mp3_text'
+export type TaskType = 'extract_links' | 'extract_text' | 'download_mp3' | 'transcribe_mp3_text' | 'download_video'
 
 export interface TaskParams {
   url?: string
@@ -44,6 +44,7 @@ export interface ElectronAPI {
   setSettings: (settings: Partial<AppSettings>) => Promise<AppSettings>
   onMessage: (callback: (data: PythonMessage) => void) => () => void
   saveTempFile: (content: string, name: string) => Promise<string>
+  checkFfmpeg: () => Promise<{ installed: boolean }>
 }
 
 declare global {

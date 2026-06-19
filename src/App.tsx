@@ -6,6 +6,7 @@ import ExtractLinksPage from './pages/ExtractLinksPage'
 import ExtractTextPage from './pages/ExtractTextPage'
 import ExtractMp3Page from './pages/ExtractMp3Page'
 import ExtractMp3AndTextPage from './pages/ExtractMp3AndTextPage'
+import ExtractVideoPage from './pages/ExtractVideoPage'
 import SettingsPage from './pages/SettingsPage'
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="/extract-text" element={<ExtractTextPage />} />
             <Route path="/extract-mp3" element={<ExtractMp3Page />} />
             <Route path="/extract-mp3-text" element={<ExtractMp3AndTextPage />} />
+            <Route path="/extract-video" element={<ExtractVideoPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
         </Routes>

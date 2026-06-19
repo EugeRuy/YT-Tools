@@ -23,4 +23,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
   // File utilities
   saveTempFile: (content, name) => ipcRenderer.invoke('file:saveTemp', content, name),
+
+  // System checks
+  checkFfmpeg: () => ipcRenderer.invoke('ffmpeg:check'),
 })

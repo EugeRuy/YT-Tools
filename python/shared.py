@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import unicodedata
@@ -68,6 +69,9 @@ def _find_yt_dlp() -> str:
     for path in candidates:
         if path.exists():
             return str(path)
+    found = shutil.which("yt-dlp")
+    if found:
+        return found
     return "yt-dlp"
 
 
@@ -94,6 +98,43 @@ def get_video_metadata(url: str) -> tuple[str, str]:
     except Exception as e:
         log("error", f"Failed to fetch metadata: {e}")
         return "unknown-channel", "unknown-title"
+
+
+def download_video(url: str, output_dir: str, channel: str = "", title: str = "") -> None:
+    if not channel or not title:
+        log("info", "Fetching metadata...")
+        channel, title = get_video_metadata(url)
+        log("info", f"Video: {channel} - {title}")
+
+    output_name = build_filename(channel, title, "")
+    output_template = f"{output_dir}/{output_name}.%(ext)s"
+    progress(0, 1, f"Downloading: {title}")
+
+    has_ffmpeg = shutil.which("ffmpeg") is not None
+    if has_ffmpeg:
+        cmd = [
+            _YT_DLP, "--no-warnings",
+            "-f", "bestvideo[ext=mp4][height<=1080]+bestaudio[ext=m4a]/b[ext=mp4]/b",
+            "--merge-output-format", "mp4",
+            "-o", output_template, url,
+        ]
+    else:
+        cmd = [
+            _YT_DLP, "--no-warnings",
+            "-f", "b",
+            "-o", output_template, url,
+        ]
+    try:
+        result = subprocess.run(cmd, timeout=600)
+        if result.returncode != 0:
+            raise RuntimeError(f"yt-dlp exited with code {result.returncode}")
+        log("success", f"Downloaded: {output_name}.mp4")
+    except subprocess.TimeoutExpired:
+        log("error", "Video download timed out")
+        raise RuntimeError("Download timed out after 600s")
+    except Exception as e:
+        log("error", f"download_video: {type(e).__name__}: {e}")
+        raise RuntimeError(f"Download failed: {e}")
 
 
 def download_audio(url: str, output_dir: str) -> None:

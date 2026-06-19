@@ -236,6 +236,7 @@ ipcMain.handle('task:start', async (event, { type, params }) => {
       extract_text: 'extract_text',
       download_mp3: 'download_mp3',
       transcribe_mp3_text: 'transcribe_mp3_text',
+      download_video: 'download_video',
     }
 
     const scriptName = scriptMap[type]
@@ -286,4 +287,13 @@ ipcMain.handle('task:cancel', () => {
 
 ipcMain.handle('task:status', () => {
   return { running: currentProcess !== null }
+})
+
+ipcMain.handle('ffmpeg:check', () => {
+  try {
+    const result = require('child_process').spawnSync('ffmpeg', ['-version'], { encoding: 'utf-8' })
+    return { installed: result.status === 0 }
+  } catch {
+    return { installed: false }
+  }
 })
