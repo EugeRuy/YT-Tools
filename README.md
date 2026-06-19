@@ -1,4 +1,4 @@
-# YT-Tools v1.0
+# YT-Tools v2.0.0
 
 A modern desktop application for extracting YouTube audio and generating transcriptions. Built with React + Electron + Python.
 
