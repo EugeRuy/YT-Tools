@@ -62,6 +62,8 @@ def _find_yt_dlp() -> str:
         script_dir / "yt-dlp",
         script_dir.parent / "yt-dlp.exe",
         script_dir.parent.parent / "resources" / "yt-dlp.exe",
+        Path(sys.executable).parent / "Scripts" / "yt-dlp.exe",
+        Path(sys.executable).parent / "Scripts" / "yt-dlp",
     ]
     for path in candidates:
         if path.exists():

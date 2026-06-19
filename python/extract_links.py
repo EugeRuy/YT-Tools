@@ -23,14 +23,14 @@ def extract_links_from_channel(url: str) -> list[str]:
         shared.log("info", f"Scanning {tab_name}...")
         try:
             cmd = [
-                "yt-dlp",
+                shared._YT_DLP,
                 "--flat-playlist",
                 "--print", "url",
                 "--no-warnings",
                 "--ignore-errors",
                 f"{url_base}{tab_suffix}",
             ]
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, shell=True)
+            result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120, shell=True)
             found = [
                 l.strip()
                 for l in result.stdout.splitlines()

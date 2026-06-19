@@ -5,7 +5,7 @@ export default function ExtractLinksPage() {
     <TaskPage
       taskType="extract_links"
       title="Extract Links"
-      description="Extract all video URLs from a YouTube channel or playlist"
+      description="Extract all video URLs from a YouTube channel"
       buttonLabel="Start Extraction"
       showUrlInput
       urlLabel="Channel"
