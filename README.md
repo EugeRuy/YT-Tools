@@ -1,21 +1,22 @@
-# YT-Tools v2.0
+# YT-Tools v1.0
 
-A modern desktop application for downloading videos and extracting audio/transcriptions from any platform. Built with React + Electron + Python.
+A modern desktop application for extracting YouTube audio and generating transcriptions. Built with React + Electron + Python.
 
 ![Tech Stack](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)
 ![Tech Stack](https://img.shields.io/badge/Electron-47848F?logo=electron&logoColor=white)
 ![Tech Stack](https://img.shields.io/badge/TailwindCSS-06B6D4?logo=tailwindcss&logoColor=white)
 ![Tech Stack](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 ![Tech Stack](https://img.shields.io/badge/Zustand-000000?logo=react&logoColor=white)
-![Version](https://img.shields.io/badge/version-2.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
 
-![Screenshot](images/screenshot.png)
+
+---
+
+![YT-Tools Home](images/home.png)
 
 ---
 
 ## Features
-
-![YT-Tools Home](images/home.png)
 
 - ✓ **Local transcription with Faster Whisper** — runs entirely on your machine, no cloud upload, no API keys
 - ✓ **No cloud API required** — no monthly bills, no rate limits, no data leaves your PC
@@ -23,8 +24,6 @@ A modern desktop application for downloading videos and extracting audio/transcr
 - ✓ **Markdown export** — every `.txt` transcript comes with an identical `.md` sibling
 - ✓ **Batch processing** — process multiple videos from a channel or URL list in one go
 - ✓ **Real-time progress** — live logs and progress bars for every task
-- ✓ **Multi-platform video download** — YouTube, Instagram, Twitter, Vimeo, Twitch, and 1000+ more sites via yt-dlp
-- ✓ **1080p quality** — automatic ffmpeg detection for high-quality video downloads
 - ✓ **Electron desktop app** — native Windows experience with drag-and-drop, file pickers, persistent settings
 
 ---
