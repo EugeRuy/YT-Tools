@@ -15,12 +15,15 @@ A modern desktop application for extracting YouTube audio and generating transcr
 
 ## Features
 
-| Feature | Description | Output |
-|---------|-------------|--------|
-| **Extract Links** | Extract all video URLs from a YouTube channel or playlist | `{channel}-video-links.txt` + `.md` |
-| **Extract Text** | Download audio then transcribe to text (audio removed after) | `{channel}-{title}.txt` + `.md` |
-| **Extract MP3** | Download YouTube videos as MP3 audio files | `{channel}-{title}.mp3` |
-| **Extract MP3 + Text** | Download MP3 and generate transcription simultaneously | `mp3/{channel}-{title}.mp3` + `transcripts/{channel}-{title}.txt` + `.md` |
+![YT-Tools Home](images/home.png)
+
+- ✓ **Local transcription with Faster Whisper** — runs entirely on your machine, no cloud upload, no API keys
+- ✓ **No cloud API required** — no monthly bills, no rate limits, no data leaves your PC
+- ✓ **Automatic cleanup** — temporary audio files are removed after transcription
+- ✓ **Markdown export** — every `.txt` transcript comes with an identical `.md` sibling
+- ✓ **Batch processing** — process multiple videos from a channel or URL list in one go
+- ✓ **Real-time progress** — live logs and progress bars for every task
+- ✓ **Electron desktop app** — native Windows experience with drag-and-drop, file pickers, persistent settings
 
 ---
 
