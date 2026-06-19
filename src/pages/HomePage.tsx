@@ -4,7 +4,7 @@ const features = [
   {
     title: 'Extract Links',
     description:
-      'Extract all video URLs from any YouTube channel or playlist and save them to a TXT file.',
+      'Extract all video URLs from any YouTube channel and save them to a TXT file.',
     icon: '⊞',
     path: '/extract-links',
     gradient: 'from-red-600/20 to-red-800/10',
@@ -38,9 +38,14 @@ const features = [
 export default function HomePage() {
   return (
     <div className="space-y-8 animate-fade-in">
-      <div className="space-y-2">
-        <h2 className="text-3xl font-bold text-gradient">Dashboard</h2>
-        <p className="text-gray-500">Choose an operation to get started</p>
+      <div className="flex items-center gap-5">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-lg font-bold text-white shadow-lg shadow-red-900/50">
+          YT
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold text-gray-100 tracking-tight">YT-Tools</h2>
+          <p className="text-sm text-gray-500">YouTube processing for audio and text</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

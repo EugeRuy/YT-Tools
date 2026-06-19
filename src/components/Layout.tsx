@@ -24,10 +24,50 @@ export default function Layout() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-surface">
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-600/5 rounded-full blur-3xl animate-pulse will-change-transform" style={{ animationDuration: '8s' }} />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-red-800/5 rounded-full blur-3xl animate-pulse will-change-transform" style={{ animationDuration: '12s' }} />
+      <div className="bg-tech">
+        <div className="bg-tech-glow" />
+        <div className="bg-tech-sweep" />
+        <div className="bg-travelers-h">
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+          <div className="bg-traveler-h" />
+        </div>
+        <div className="bg-travelers-v">
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+          <div className="bg-traveler-v" />
+        </div>
       </div>
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
+      <div className="bg-particle" />
 
       <NavTabs />
 

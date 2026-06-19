@@ -143,8 +143,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 860,
-    minWidth: 900,
-    minHeight: 700,
+    minWidth: 1024,
+    minHeight: 860,
     title: 'YT-Tools',
     backgroundColor: '#0f172a',
     show: false,
