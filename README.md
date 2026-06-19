@@ -9,7 +9,6 @@ A modern desktop application for extracting YouTube audio and generating transcr
 ![Tech Stack](https://img.shields.io/badge/Zustand-000000?logo=react&logoColor=white)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 
-![Screenshot](images/screenshot.png)
 
 ---
 
