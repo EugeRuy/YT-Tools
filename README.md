@@ -13,9 +13,11 @@ A modern desktop application for extracting YouTube audio and generating transcr
 
 ---
 
-## Features
-
 ![YT-Tools Home](images/home.png)
+
+---
+
+## Features
 
 - ✓ **Local transcription with Faster Whisper** — runs entirely on your machine, no cloud upload, no API keys
 - ✓ **No cloud API required** — no monthly bills, no rate limits, no data leaves your PC
