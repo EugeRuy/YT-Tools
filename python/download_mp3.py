@@ -24,18 +24,20 @@ def main() -> None:
 
     shared.progress(0, len(urls), f"Starting: {len(urls)} URLs")
 
-    try:
-        for idx, url in enumerate(urls, 1):
-            shared.progress(idx, len(urls), f"Downloading {idx}/{len(urls)}")
+    succeeded = 0
+    failed = 0
+    for idx, url in enumerate(urls, 1):
+        shared.progress(idx, len(urls), f"Downloading {idx}/{len(urls)}")
+        try:
             channel, title = shared.get_video_metadata(url)
             shared.log("info", f"Processing: {channel} - {title}")
             shared.download_audio(url, str(output_dir))
             shared.log("success", f"Downloaded: {shared.build_filename(channel, title, '.mp3')}")
-        shared.complete(True, str(output_dir), f"Downloaded {len(urls)} MP3 files")
-    except Exception as e:
-        shared.error(str(e))
-        shared.complete(False, message=str(e))
-        sys.exit(1)
+            succeeded += 1
+        except Exception as e:
+            shared.error(f"Skipped {url}: {e}")
+            failed += 1
+    shared.complete(True, str(output_dir), f"Downloaded {succeeded} MP3 files ({failed} skipped)")
 
 
 if __name__ == "__main__":

@@ -65,14 +65,22 @@ def main() -> None:
 
     try:
         model = shared.load_whisper_model()
-        for idx, url in enumerate(urls, 1):
-            shared.progress(idx, len(urls), f"Processing {idx}/{len(urls)}")
-            process_url(url, model, str(mp3_dir), str(transcripts_dir))
-        shared.complete(True, str(output_dir), f"Processed {len(urls)} videos")
     except Exception as e:
         shared.error(str(e))
         shared.complete(False, message=str(e))
         sys.exit(1)
+
+    succeeded = 0
+    failed = 0
+    for idx, url in enumerate(urls, 1):
+        shared.progress(idx, len(urls), f"Processing {idx}/{len(urls)}")
+        try:
+            process_url(url, model, str(mp3_dir), str(transcripts_dir))
+            succeeded += 1
+        except Exception as e:
+            shared.error(f"Skipped {url}: {e}")
+            failed += 1
+    shared.complete(True, str(output_dir), f"Processed {succeeded} videos ({failed} skipped)")
 
 
 if __name__ == "__main__":

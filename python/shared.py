@@ -7,6 +7,7 @@ import sys
 import unicodedata
 from pathlib import Path
 from typing import TYPE_CHECKING
+from urllib.parse import urlparse
 
 if TYPE_CHECKING:
     from faster_whisper import WhisperModel
@@ -217,16 +218,25 @@ def delete_file(file_path: str) -> None:
         log("warn", f"Could not delete: {e}")
 
 
+def _is_http_url(text: str) -> bool:
+    parsed = urlparse(text)
+    return parsed.scheme in ("http", "https") and bool(parsed.netloc)
+
+
 def read_url_list(file_path: str) -> list[str]:
     path = Path(file_path)
     if not path.exists():
         log("error", f"File not found: {file_path}")
         return []
-    urls = [
+    raw = [
         line.strip()
         for line in path.read_text(encoding="utf-8").splitlines()
-        if line.strip() and not line.strip().startswith("#")
+        if line.strip()
     ]
+    skipped = [line for line in raw if not _is_http_url(line)]
+    for s in skipped:
+        log("warn", f"Skipping invalid URL: {s}")
+    urls = [line for line in raw if _is_http_url(line)]
     log("info", f"Read {len(urls)} URLs from {path.name}")
     return urls
 
