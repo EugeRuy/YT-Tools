@@ -83,7 +83,10 @@ def get_video_metadata(url: str) -> tuple[str, str]:
     try:
         log("info", f"Fetching metadata for: {url}")
         result = subprocess.run(
-            [_YT_DLP, "--no-warnings", "--print", "channel", "--print", "title", url],
+            [_YT_DLP, "--no-warnings",
+             "--user-agent", "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36",
+             "--extractor-args", "youtube:player_client=android",
+             "--print", "channel", "--print", "title", url],
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -112,16 +115,20 @@ def download_video(url: str, output_dir: str, channel: str = "", title: str = ""
     progress(0, 1, f"Downloading: {title}")
 
     has_ffmpeg = shutil.which("ffmpeg") is not None
+    base_opts = [
+        _YT_DLP, "--no-warnings",
+        "--user-agent", "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36",
+        "--extractor-args", "youtube:player_client=android",
+        "--geo-bypass",
+    ]
     if has_ffmpeg:
-        cmd = [
-            _YT_DLP, "--no-warnings",
-            "-f", "bestvideo[ext=mp4][height<=1080]+bestaudio[ext=m4a]/b[ext=mp4]/b",
+        cmd = base_opts + [
+            "-f", "bestvideo[height<=1080]+bestaudio/best",
             "--merge-output-format", "mp4",
             "-o", output_template, url,
         ]
     else:
-        cmd = [
-            _YT_DLP, "--no-warnings",
+        cmd = base_opts + [
             "-f", "b",
             "-o", output_template, url,
         ]
@@ -142,6 +149,9 @@ def download_audio(url: str, output_dir: str) -> None:
     cmd = [
         _YT_DLP,
         "--no-warnings",
+        "--user-agent", "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36",
+        "--extractor-args", "youtube:player_client=android",
+        "--geo-bypass",
         "-x",
         "--audio-format", "mp3",
         "-o", f"{output_dir}/%(channel)s-%(title)s.%(ext)s",

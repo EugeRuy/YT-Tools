@@ -28,6 +28,9 @@ def extract_links_from_channel(url: str) -> list[str]:
                 "--print", "url",
                 "--no-warnings",
                 "--ignore-errors",
+                "--user-agent", "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36",
+                "--extractor-args", "youtube:player_client=android",
+                "--geo-bypass",
                 f"{url_base}{tab_suffix}",
             ]
             result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120, shell=True)
