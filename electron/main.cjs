@@ -148,6 +148,7 @@ function createWindow() {
     title: 'YT-Tools',
     backgroundColor: '#0f172a',
     show: false,
+    icon: path.join(__dirname, '..', 'build', 'icon.ico'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),
       contextIsolation: true,
