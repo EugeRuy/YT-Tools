@@ -133,7 +133,7 @@ def download_video(url: str, output_dir: str, channel: str = "", title: str = ""
             "-o", output_template, url,
         ]
     try:
-        result = subprocess.run(cmd, timeout=600)
+        result = subprocess.run(cmd, timeout=600, shell=True)
         if result.returncode != 0:
             raise RuntimeError(f"yt-dlp exited with code {result.returncode}")
         log("success", f"Downloaded: {output_name}.mp4")
